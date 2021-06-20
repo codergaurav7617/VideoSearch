@@ -11,7 +11,6 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -27,7 +26,7 @@ public class VideoFetcher {
     private final RestTemplate restTemplate;
     private static final SnippetToVideoEntityConverter mapper = new SnippetToVideoEntityConverter();
 
-//    @Scheduled(fixedRateString = "${video.fetch.reloadTimeInMs}")
+    @Scheduled(fixedRateString = "${video.fetch.reloadTimeInMs}")
     public void videoFetcherScheduler(){
         ResponseEntity<Response> responseEntity = restTemplate.getForEntity(getResourceUrl(), Response.class);
         List<Item> itemList = Objects.requireNonNull(responseEntity.getBody()).getItems();
